@@ -1,8 +1,22 @@
+/**
+ * EfficientRobot
+ * @author Andrea Gonzales, Stephanie Kong, Yasmin Riaz
+ * @version 3/19/15
+ */
 
+/**
+ *A subclass of Robot that finds the most efficient path and uses it
+ */
 public class EfficientRobot extends Robot{
 	
 	private boolean[][] mazeGrid;
 	
+    /**
+     * Creates a new EfficientRobot with the given maze.
+     * @param theMaze the maze to traverse 
+     * @pre maze is not null
+     * Overrides constructor, sets random initial direction. 
+     */
 	public EfficientRobot(Maze theMaze) 
 	{
 		super(theMaze);
@@ -12,7 +26,7 @@ public class EfficientRobot extends Robot{
 	}
 	
 	/**
-	 * calls the fillToIntersection method on each coordinate in the mze
+	 * calls the fillToIntersection method on each coordinate in the maze
 	 */
 	private void analyzeMaze() {
 		for (int x = 0; x < mazeGrid.length; x++) {
@@ -21,7 +35,7 @@ public class EfficientRobot extends Robot{
 				fillToIntersection(new Location(y,x));
 			}
 		}
-		//analysisTest();
+		analysisTest();
 	}
 	
 	/**
@@ -54,6 +68,7 @@ public class EfficientRobot extends Robot{
 	 * @return returns maze grid copy with filled-in dead ends as "*"s
 	 */
 	private void analysisTest() {
+		System.out.println("TESTED ANALYSIS OF MAZE: ");
 		for (int x = 0; x < mazeGrid.length; x++) {
 			System.out.println();
 			for (int y = 0; y < mazeGrid[0].length; y++) {
@@ -75,7 +90,7 @@ public class EfficientRobot extends Robot{
 		
 		if (!mazeGrid[adjacentLocation.getYCoordinate()][adjacentLocation.getXCoordinate()]) {
 			setCurrentLocation(adjacentLocation);
-			mazeGrid[adjacentLocation.getYCoordinate()][adjacentLocation.getXCoordinate()] = true;
+			mazeGrid[adjacentLocation.getYCoordinate()][adjacentLocation.getXCoordinate()] = true; //so it does not go backwards
 		} else {
 			for (Direction dir: Direction.values()) {
 				adjacentLocation = getCurrentLocation().getAdjacentLocationTowards(dir);

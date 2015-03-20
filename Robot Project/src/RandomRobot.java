@@ -17,14 +17,13 @@ public class RandomRobot extends Robot{
 	public void move() {
 		Location adjacent = getCurrentLocation().getAdjacentLocationTowards(getFacingDirection());
 		if (inMazeisWallisEntrance(adjacent)) { //if it hits a wall
-			Direction random = getRandomDirection();
-			adjacent = getCurrentLocation().getAdjacentLocationTowards(random);
-			
-			if (!inMazeisWallisEntrance(adjacent)) {
-				setCurrentLocation(adjacent);
-				setFacingDirection(random);
+			Direction random = null;
+			while (inMazeisWallisEntrance(adjacent)) {
+				random = getRandomDirection();
+				adjacent = getCurrentLocation().getAdjacentLocationTowards(random);				
 			}
-			
+			setCurrentLocation(adjacent);
+			setFacingDirection(random);
 		} else {
 			setCurrentLocation(adjacent);
 		}
